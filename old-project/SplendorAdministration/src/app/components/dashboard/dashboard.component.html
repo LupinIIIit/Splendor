@@ -1,0 +1,26 @@
+<mat-sidenav-container [hasBackdrop]="true" class="h-100">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="side-nav">
+    Sidenav content
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <img src="../../../assets/images/icon-32x32.png" /> &nbsp;
+      <span>Splendor Admin</span>
+      <button mat-icon-button (click)="sidenav.toggle()" color="accent">
+        <mat-icon>apps</mat-icon>
+      </button>
+      <span class="fill-remaining-space"></span>
+      <mat-menu #appMenu="matMenu"  yPosition="above">
+        <ng-template matMenuContent let-name="user">
+          <button mat-menu-item>Settings</button>
+          <button mat-menu-item (click)="Logout()">Log off {{user.userName}}</button>
+        </ng-template>
+      </mat-menu>
+      <button mat-icon-button [matMenuTriggerFor]="appMenu" [matMenuTriggerData]="user" color="accent">
+        <mat-icon>account_box</mat-icon>
+      </button>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

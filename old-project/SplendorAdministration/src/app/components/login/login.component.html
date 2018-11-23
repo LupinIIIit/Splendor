@@ -1,0 +1,51 @@
+<div class="main-div">
+  <mat-card>
+    <mat-card-title>
+      <img src="../../../assets/images/icon-32x32.png" style="float: left;" />
+      <h4 class="pt-2 pl-5" style="color: #404040;font-size: 1.5rem;font-weight: 600;">Splendor Admin</h4>
+    </mat-card-title>
+    <mat-horizontal-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="usernameFormGroup">
+        <form [formGroup]="usernameFormGroup">
+          <ng-template matStepLabel>Username o E-Mail</ng-template>
+          <mat-form-field class="w-100">
+            <i class="material-icons prefix" matPrefix>account_circle</i>
+            <input matInput placeholder="Inserisci la username o la E-Mail" formControlName="Username" required>
+          </mat-form-field>
+          <div style="text-align: right;">
+            <button mat-raised-button matStepperNext color="primary">Avanti</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="passwordFormGroup">
+        <form [formGroup]="passwordFormGroup">
+          <ng-template matStepLabel>Inserisci la password</ng-template>
+          <mat-form-field class="w-100">
+            <input matInput placeholder="Inserisci la password per il tuo accout" [type]="hide ? 'password' : 'text'" formControlName="Password">
+            <i matPrefix class="material-icons prefix">vpn_key</i>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          </mat-form-field>
+          <div style="text-align: right;" class="pb-2">
+            <mat-checkbox formControlName="RememberMe" color="primary">Ricordami</mat-checkbox>
+            <i class="material-icons" matSuffix matTooltip="Selezionando questo chekbox sarà possibile memorizzare la password per un mese!">question_answer</i>
+          </div>
+          <div style="text-align: right;">
+            <button mat-raised-button matStepperPrevious>Indietro</button>&nbsp;&nbsp;
+            <button mat-raised-button (click)="OnSubmit()" color="primary">Accedi</button>
+          </div>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-card>
+</div>
+
+<mat-toolbar class="bg-black-trasparent">
+  <span class="fill-remaining-space"></span>
+  <span>©{{year|date:'yyyy' }} Antonio Narra</span>&nbsp;&nbsp;
+  <span>
+    <a href="https://www.splendorsrl.it" style="color: #fff;" target="_blank">Condizioni per l'utilizzo</a>
+  </span>&nbsp;&nbsp;
+  <span>
+    <a href="https://www.splendorsrl.it" style="color: #fff;" target="_blank">Privacy</a>
+  </span>
+</mat-toolbar>

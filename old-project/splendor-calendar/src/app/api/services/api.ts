@@ -1,0 +1,11 @@
+export * from './account.service';
+import { AccountService } from './account.service';
+export * from './appuntamenti.service';
+import { AppuntamentiService } from './appuntamenti.service';
+export * from './configuration.service';
+import { ConfigurationService } from './configuration.service';
+export * from './aziende.service';
+import { AziendeService } from  './aziende.service';
+export * from './message.service';
+import { MessageService } from  './message.service';
+export const APIS = [AccountService, AppuntamentiService, ConfigurationService , AziendeService , MessageService];

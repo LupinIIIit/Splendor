@@ -1,0 +1,5 @@
+<div class="col-12 shadow-lg bg-white rounded p-3 m-2">
+  <ng-select [items]="aziende" bindLabel="NomeAzienda" bindValue="AziendaId" [(ngModel)]="azienda" placeholder="Selezionare un calendario ...">
+  </ng-select>
+  <app-calendar [AziendaId]="azienda"></app-calendar>
+</div>

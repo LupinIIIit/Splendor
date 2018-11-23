@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <div class="row">
+    <ng-container *ngIf="aziende">
+      <div class="col shadow-lg bg-white rounded p-3 m-2 h-100" *ngFor="let item of aziende">
+        <app-today [azienda]="item"></app-today>
+      </div>
+    </ng-container>
+  </div>
+</div>

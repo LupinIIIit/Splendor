@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~angular-calendar/css/angular-calendar.css";
+@import url("./assets/fontawesome/css/fontawesome-all.min.css");
+@import "~@ng-select/ng-select/themes/default.theme.css";
+html,body{
+  font-size: small !important;
+  font-family: arial,sans-serif !important;
+}
+.bg-red {
+  background-color: #e34553 !important;
+}
+
+a.bg-red:hover,
+a.bg-red:focus,
+button.bg-red:hover,
+button.bg-red:focus {
+  background-color: #cf3c49 !important;
+}
+/*#f8f8f8*/
+.bg-grey{
+  background-color: #cfcfcf !important;
+}
+a.bg-red:hover,
+a.bg-red:focus,
+button.bg-red:hover,
+button.bg-red:focus {
+  background-color: #cfcfcf !important;
+}
+.display-1 {text-align:center;color:#e1b7b7;}
+.display-1 .fa {animation:fa-spin 5s infinite linear;}
+.display-3 {text-align:center;color:#df726a;}
+.lower-case {text-align:center;}

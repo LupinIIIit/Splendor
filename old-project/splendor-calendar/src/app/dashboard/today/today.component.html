@@ -1,0 +1,26 @@
+<ng-container *ngIf="azienda">
+  <div class="text-center">
+    <h2>{{azienda.NomeAzienda}}</h2>
+    <ng-container *ngIf="lists">
+      <p *ngIf="lists.length>0;else other_content">Oggi ci sono
+        <span class="badge badge-info">{{lists.length}}</span> appuntamenti</p>
+      <ng-template #other_content>Nessun appuntamento oggi.</ng-template>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="lists&&lists.length>0">
+    <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" activeIds="pnl-{{azienda.AziendaId}}-0">
+      <ngb-panel *ngFor="let item of lists; let index = index" id="pnl-{{azienda.AziendaId}}-{{index}}">
+        <ng-template ngbPanelTitle>
+          <span>
+            <i class="fas fa-calendar-alt"></i> {{item.StartTime | date:'HH:mm'}}-{{item.EndTime | date:'HH:mm'}}
+            <b>{{item.Oggetto}}</b>
+            <div style="float: right; width: 16px; height:16px ;border:1px solid;" [style.border-color]="item.BorderColor" [style.background-color]="item.Color"></div>
+          </span>
+        </ng-template>
+        <ng-template ngbPanelContent>
+          {{item.Body}}
+        </ng-template>
+      </ngb-panel>
+    </ngb-accordion>
+  </ng-container>
+</ng-container>

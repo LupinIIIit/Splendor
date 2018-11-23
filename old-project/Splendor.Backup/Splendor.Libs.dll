@@ -1,0 +1,123 @@
+{
+  "home-folder": "",
+  "output-folder": {
+    "Path": [
+      "//splendornas/backup"
+    ],
+    "UserName": "admin",
+    "Domain": "microsoftlocal",
+    "Passord": "Splendor1!",
+    "MaxFileSie": 0
+  },
+  "apps": [
+    {
+      "ApplicationId": 1,
+      "ApplicationName": "contabilita",
+      "Path": [
+        "//splendornas/contabilita"
+      ],
+      "UserName": "admin",
+      "Domain": "microsoftlocal",
+      "Passord": "Splendor1!",
+      "MaxFileSie": 2147483648
+    },
+    {
+      "ApplicationId": 2,
+      "ApplicationName": "foto",
+      "Path": [
+        "//splendornas/foto"
+      ],
+      "UserName": "admin",
+      "Domain": "microsoftlocal",
+      "Passord": "Splendor1!",
+      "MaxFileSie": 2147483648
+    },
+    {
+      "ApplicationId": 3,
+      "ApplicationName": "WGESTCAR",
+      "Path": [
+        "//splendornas/WGESTCAR"
+      ],
+      "UserName": "admin",
+      "Domain": "microsoftlocal",
+      "Passord": "Splendor1!",
+      "MaxFileSie": 2147483648
+    },
+    {
+      "ApplicationId": 4,
+      "ApplicationName": "outlook",
+      "Path": [
+        "//splendornas/outlook"
+      ],
+      "UserName": "admin",
+      "Domain": "microsoftlocal",
+      "Passord": "Splendor1!",
+      "MaxFileSie": 2147483648
+    },
+    {
+      "ApplicationId": 5,
+      "ApplicationName": "VideoTV",
+      "Path": [
+        "//splendornas/VideoTV"
+      ],
+      "UserName": "admin",
+      "Domain": "microsoftlocal",
+      "Passord": "Splendor1!",
+      "MaxFileSie": 2147483648
+    },
+    {
+      "ApplicationId": 6,
+      "ApplicationName": "wincar",
+      "Path": [
+        "//reception-pc/wincar/archivi",
+        "//reception-pc/wincar/contab"
+      ],
+      "UserName": "silvia",
+      "Domain": "microsoftlocal",
+      "Passord": "Splendor1!",
+      "MaxFileSie": 2147483648
+    },
+    {
+      "ApplicationId": 7,
+      "ApplicationName": "winmec",
+      "Path": [
+        "//silvia-pc/winmec/archivi",
+        "//silvia-pc/winmec/contab"
+      ],
+      "UserName": "silvia",
+      "Domain": "microsoftlocal",
+      "Passord": "Splendor1!",
+      "MaxFileSie": 2147483648
+    },
+    {
+      "ApplicationId": 8,
+      "ApplicationName": "wintouch splendor",
+      "Path": [
+        "//Server1/winntouch",
+        "//Server1/windows/SysWOW64/Winnc.ini",
+        "//Server1/windows/SysWOW64/Wincheck.ini",
+        "//Server1/windows/System32/Winnc.ini",
+        "//Server1/windows/System32/Wincheck.ini"
+      ],
+      "UserName": "administrator",
+      "Domain": "microsoftlocal",
+      "Passord": "Splendor123!",
+      "MaxFileSie": 2147483648
+    },
+    {
+      "ApplicationId": 9,
+      "ApplicationName": "wintouch continetal",
+      "Path": [
+        "//server-2/winntouch",
+        "//server-2/windows/SysWOW64/Winnc.ini",
+        "//server-2/windows/SysWOW64/Wincheck.ini",
+        "//server-2/windows/System32/Winnc.ini",
+        "//server-2/windows/System32/Wincheck.ini"
+      ],
+      "UserName": "administrator",
+      "Domain": "microsoftlocal",
+      "Passord": "Splendor123!",
+      "MaxFileSie": 2147483648
+    }
+  ]
+}
