@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Blazor.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Net.Mime;
@@ -27,6 +28,9 @@ namespace blazor_electron.Server
                     WasmMediaTypeNames.Application.Wasm,
                 });
             });
+            var connection = "Data Source=todo.db";
+            services.AddDbContext<TodoContext>(options => options.UseSqlite(connection));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
