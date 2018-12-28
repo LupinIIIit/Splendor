@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material';
-import { User } from '../../models/user.model';
+import { User } from '../../models/index.models';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 @Component({

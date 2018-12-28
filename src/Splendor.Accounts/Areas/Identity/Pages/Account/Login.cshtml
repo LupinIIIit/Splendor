@@ -1,82 +1,127 @@
 ﻿@page
 @model LoginModel
-
 @{
+    Layout = "_LayoutLogin";
     ViewData["Title"] = "Log in";
 }
-
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to log in.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
+<div class="form">
+    <form id="account" method="post">
+        <div class="back"><span><i class="material-icons circle">backspace_circle</i></span></div>
+        <div class="title">
+            <img src="~/images/icon-32x32.png" style="float: left;" />
+            <h4>Splendor Admin</h4>
+        </div>
+        <div class="message">
+            <div class="select-div">
+                <strong>Benevenuto</strong><br />
+                <i class="material-icons prefix">account_circle</i>
+                <select class="select-login" id="user-select" disabled>
+                    <option>tony@fatture-online.com</option>
+                </select>
+                <br />
+                In caso non si ricordi la password premere <a id="forgot-password" asp-page="./ForgotPassword">qui.</a>
+            </div>
+            <div class="dati-accesso">
+                <strong>Benevenuto</strong><br />
+                Si prega di fornire i propri dati di accesso all'applicazione.<br />
+                Se non sono ancora stati pervenuti provare a richiederli <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">qui.</a><br />
+                In caso non si ricordi la password premere <a id="forgot-password" asp-page="./ForgotPassword">qui.</a>
+            </div>
+        </div>
+        <div class="warning">
+            @if (ModelState.ErrorCount > 0) {
+                foreach (var modelState in ViewData.ModelState.Values) {
+                    foreach (var error in modelState.Errors) {
+                        <div>@error.ErrorMessage</div>
+                    }
                 }
             }
-        </section>
-    </div>
+        </div>
+        <div class="inputs">
+            <div class="email">
+                <i class="material-icons prefix">account_circle</i>
+                <input asp-for="Input.Email" class="first" placeholder="Inserire la E-Mail" />
+                <button class="next">Successivo</button>
+            </div>
+            <div class="password">
+                <i class="material-icons prefix">vpn_key</i>
+                <input asp-for="Input.Password" class="second" placeholder="Inserire la password" />
+                <button class="login">Accedi</button>
+            </div>
+        </div>
+    </form>
 </div>
-
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <script>
+        setTimeout(() => {
+            $('.email > input').focus()
+        }, 300)
+
+        $('.email > input').on('keydown', (event) => {
+            if (event.which === 13 || event.keyCode === 13) {
+                $('.email > input').blur()
+                $('.next').click()
+            }
+        })
+
+        $('.password > input').on('keydown', (event) => {
+            if (event.which === 13 || event.keyCode === 13) {
+                $('.login').click()
+            }
+        })
+
+        $('.next').on('click', (event) => {
+            let emailInput = $('.email > input').val()
+            if (validateEmail(emailInput)) {
+                event.preventDefault()
+                $('.inputs').addClass('shift')
+                $('.back').addClass('active-back')
+                $('.select-div').show()
+                $("#user-select").prop("disabled", false);
+                $("#user-select").empty();
+                $('#user-select').append('<option value="' + $("#Input_Email").val() + '">' + $("#Input_Email").val() + '</option>');
+                $("#user-select").prop("disabled", true);
+                $('.dati-accesso').hide();
+                $('.email > input').css({
+                    'border': '1px solid #cccccc'
+                })
+                $('.warning').empty()
+                setTimeout(() => {
+                    $('.password > input').focus()
+                }, 400)
+            } else {
+                event.preventDefault()
+                $('.warning').empty()
+                $('.email > input').css({
+                    'border': '1px solid red'
+                })
+                $('.warning').append('Attenzione non è stato inserito una email valida')
+
+            }
+        })
+
+        $('.back').on('click', (event) => {
+            event.preventDefault()
+            $('.inputs').removeClass('shift')
+            $('.back').removeClass('active-back')
+            $('.select-div').hide()
+            $('.dati-accesso').show();
+            setTimeout(() => {
+                $('.email > input').focus()
+            }, 300)
+        })
+
+        $('.login').on('click', (event) => {
+            event.preventDefault()
+            $('form').submit();
+            $('form').empty();
+            $('form').append('<div class="loader"></div>')
+
+        })
+
+        const validateEmail = (email) => {
+            var re = /^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            return re.test(email)
+        }
+    </script>
 }

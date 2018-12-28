@@ -1,10 +1,11 @@
+
+import {throwError as observableThrowError,  Observable, Subject } from 'rxjs';
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
 import { AuthService } from './auth.service';
 import { ConfigurationService } from './configuration.service'
 import { switchMap, catchError, mergeMap } from 'rxjs/operators';
-import { LoginView } from '../models/index.model';
+import { LoginView } from '../models/index.models';
 @Injectable({ providedIn: 'root' })
 export class EndpointFactoryService {
   static readonly apiVersion: string = "1";
@@ -69,18 +70,18 @@ export class EndpointFactoryService {
             this.resumeTasks(false);
             if (refreshLoginError.status == 401 || (refreshLoginError.url && refreshLoginError.url.toLowerCase().includes(this.loginUrl.toLowerCase()))) {
               this.authService.reLogin();
-              return Observable.throw('session expired');
+              return observableThrowError('session expired');
             }
             else {
-              return Observable.throw(refreshLoginError || 'server error');
+              return observableThrowError(refreshLoginError || 'server error');
             }
           }));
     }
     if (error.url && error.url.toLowerCase().includes(this.loginUrl.toLowerCase())) {
       this.authService.reLogin();
-      return Observable.throw((error.error && error.error.error_description) ? `session expired (${error.error.error_description})` : 'session expired');
+      return observableThrowError((error.error && error.error.error_description) ? `session expired (${error.error.error_description})` : 'session expired');
     } else {
-      return Observable.throw(error);
+      return observableThrowError(error);
     }
   }
   private pauseTask(continuation: () => Observable<any>) {
@@ -88,7 +89,7 @@ export class EndpointFactoryService {
       this.taskPauser = new Subject();
     }
     return this.taskPauser.pipe(switchMap(continueOp => {
-      return continueOp ? continuation() : Observable.throw('session expired');
+      return continueOp ? continuation() : observableThrowError('session expired');
     }));
   }
   private resumeTasks(continueOp: boolean) {

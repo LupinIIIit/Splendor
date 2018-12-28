@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
 import { AuthService } from '../../services/index.service';
-import { LoginView } from '../../models/index.model';
+import { LoginView } from '../../models/index.models';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

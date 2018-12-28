@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Splendor.Accounts</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Roboto+Mono:300,400,700|Roboto+Slab:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/login.css" />
+    <style>
+    </style>
+</head>
+<body class="login-body">
+    <partial name="_CookieConsentPartial" />
+    <div class="main-div">
+        @RenderBody()
+    </div>
+    <footer class="bg-black-trasparent">
+        <span class="fill-remaining-space"></span>
+        <span>&copy; 2018 Antonio Narra</span>&nbsp;&nbsp;
+        <span>
+            <a href="https://www.splendorsrl.it" style="color: #fff;" target="_blank">Condizioni per l'utilizzo</a>
+        </span>&nbsp;&nbsp;
+        <span>
+            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <a href="https://www.splendorsrl.it" style="color: #fff;" target="_blank">Privacy</a>
+        </span>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

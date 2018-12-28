@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PermissionValues, User, LoginResponse, IdToken, LoginView } from '../models/index.model';
+import { PermissionValues, User, LoginResponse, IdToken, LoginView } from '../models/index.models';
 import { ConfigurationService } from "./configuration.service"
 import { EndpointFactoryService } from "./endpoint-factory.service"
 import { LocalStoreManager } from "./local-store-manager.service"
