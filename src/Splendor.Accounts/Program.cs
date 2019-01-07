@@ -43,7 +43,6 @@ namespace Splendor.Accounts {
             {
                 builder.ClearProviders();
                 builder.AddSerilog();
-            })
-                .UseStartup<Startup>();
+            }).UseStartup<Startup>();
     }
 }

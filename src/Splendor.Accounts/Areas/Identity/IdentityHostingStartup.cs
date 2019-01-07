@@ -9,12 +9,9 @@ using Splendor.Accounts.Data;
 using Splendor.Accounts.Models;
 
 [assembly: HostingStartup(typeof(Splendor.Accounts.Areas.Identity.IdentityHostingStartup))]
-namespace Splendor.Accounts.Areas.Identity
-{
-    public class IdentityHostingStartup : IHostingStartup
-    {
-        public void Configure(IWebHostBuilder builder)
-        {
+namespace Splendor.Accounts.Areas.Identity {
+    public class IdentityHostingStartup : IHostingStartup {
+        public void Configure(IWebHostBuilder builder) {
             builder.ConfigureServices((context, services) => {
             });
         }
