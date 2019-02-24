@@ -53,7 +53,8 @@ cd backup
 echo #######################################################################################################################
 echo #                                               Backup WinCar inizio                                                  #
 echo #######################################################################################################################
-if not exist %wincar-filename% (
+REM if not exist %wincar-filename% (
+if exist %wincar-filename% (
     mkdir wincar
     cd wincar
     7z a -r  %wincar-archivi% "%home-wincar%\archivi\*.*"
@@ -69,7 +70,8 @@ echo ###########################################################################
 echo #######################################################################################################################
 echo #                                               Backup WinMec inizio                                                  #
 echo #######################################################################################################################
-if not exist %winmec-filename% (
+REM if not exist %winmec-filename% (
+if exist %winmec-filename% (
     if exist V:\NUL (
         echo V: essite gia smonto la directory
         net use V: /delete
@@ -140,10 +142,10 @@ if not exist %contab% (
         echo V: essite gia smonto la directory
         net use V: /delete
         echo V: Smontata la rimonto
-        net use v: %home-contab%  /user:%username2% %password% /persistent:no
+        net use v: %home-contab% /persistent:no
     ) else (
         echo monto V:
-        net use v: %home-contab%  /user:%username2% %password% /persistent:no
+        net use v: %home-contab% /persistent:no
     )
     7z a -r  %contab% "V:\*.*"
 )
@@ -158,10 +160,10 @@ if not exist %foto% (
         echo V: essite gia smonto la directory
         net use V: /delete
         echo V: Smontata la rimonto
-        net use v: %home-foto%  /user:%username2% %password% /persistent:no
+        net use v: %home-foto% /persistent:no
     ) else (
         echo monto V:
-        net use v: %home-foto%  /user:%username2% %password% /persistent:no
+        net use v: %home-foto% /persistent:no
     )
     7z a -r  %foto% "V:\*.*" -v5g
 )
@@ -190,16 +192,7 @@ echo ###########################################################################
 echo #                                               Backup Outlook inizio                                                 #
 echo #######################################################################################################################
 if not exist %outlook% (
-    if exist V:\NUL (
-        echo V: essite gia smonto la directory
-        net use V: /delete
-        echo V: Smontata la rimonto
-        net use v: %home-outlook%  /user:%username2% %password% /persistent:no
-    ) else (
-        echo monto V:
-        net use v: %home-outlook%  /user:%username2% %password% /persistent:no
-    )
-    7z a -r  %outlook% "V:\*.*"
+    7z a -r  %outlook% "Z:\*.*"
 )
 echo #######################################################################################################################
 echo #                                               Backup Outlook fine                                                   #
@@ -212,10 +205,10 @@ if not exist %video% (
         echo V: essite gia smonto la directory
         net use V: /delete
         echo V: Smontata la rimonto
-        net use v: %home-video%  /user:%username2% %password% /persistent:no
+        net use v: %home-video% /persistent:no
     ) else (
         echo monto V:
-        net use v: %home-video%  /user:%username2% %password% /persistent:no
+        net use v: %home-video% /persistent:no
     )
     7z a -r  %video% "V:\*.*"
 )
@@ -235,10 +228,10 @@ if exist V:\NUL (
     echo V: essite gia smonto la directory
     net use V: /delete
     echo V: Smontata la rimonto
-    net use v: %home-backup%  /user:%username2% %password% /persistent:no
+    net use v: %home-backup% /persistent:no
 ) else (
     echo monto V:
-    net use v: %home-backup%  /user:%username2% %password% /persistent:no
+    net use v: %home-backup% /persistent:no
 )
 echo %formatdate%
 
