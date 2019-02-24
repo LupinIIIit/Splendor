@@ -32,7 +32,7 @@ set winmec-archivi=winmec-archivi.zip
 set winmec-contab=winmec-contab.zip
 set winmec-fatt-electr=winmec-fatt-electr.zip
 set wintouch-splendor=wintouch.splendor.zip
-set wintouch-continental=wintouch.splendor.zip
+set wintouch-continental=wintouch.continental.zip
 set contab=contab%formatdate%.zip
 set foto=foto%formatdate%.zip
 set wgescar=wgescar%formatdate%.zip
@@ -53,8 +53,7 @@ cd backup
 echo #######################################################################################################################
 echo #                                               Backup WinCar inizio                                                  #
 echo #######################################################################################################################
-REM if not exist %wincar-filename% (
-if exist %wincar-filename% (
+if not exist %wincar-filename% (
     mkdir wincar
     cd wincar
     7z a -r  %wincar-archivi% "%home-wincar%\archivi\*.*"
@@ -70,8 +69,7 @@ echo ###########################################################################
 echo #######################################################################################################################
 echo #                                               Backup WinMec inizio                                                  #
 echo #######################################################################################################################
-REM if not exist %winmec-filename% (
-if exist %winmec-filename% (
+if not exist %winmec-filename% (
     if exist V:\NUL (
         echo V: essite gia smonto la directory
         net use V: /delete
