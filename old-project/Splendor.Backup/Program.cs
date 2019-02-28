@@ -20,7 +20,7 @@ namespace Splendor.Backup {
               .CreateLogger();
             // Adding JSON file into IConfiguration.
             IConfiguration config = new ConfigurationBuilder()
-                 .AddJsonFile("Splendor.Libs.dll", true, true)
+                 .AddJsonFile("appsettings.json", true, true)
                  .Build();
 
             // Read configuration

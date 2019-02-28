@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Splendor.Backup.Helper {
+namespace Splendor.Backup.Helpers {
     public class CheckFoldersBackup {
         public bool Run() {
             Log.Information("Start Check Folder backup");
