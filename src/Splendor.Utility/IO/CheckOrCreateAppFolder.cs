@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-
 namespace Splendor.Utility.IO {
     public static class CheckOrCreateAppFolder {
         static readonly string userPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);

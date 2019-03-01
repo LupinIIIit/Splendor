@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Net;
 using System.Runtime.InteropServices;
-
 namespace Splendor.Utility.Network {
     public class NetworkConnection : IDisposable {
-        string _networkName;
+        readonly string _networkName;
         public NetworkConnection(string networkName, NetworkCredential credentials) {
             _networkName = networkName;
             var netResource = new NetResource() {

@@ -10,7 +10,7 @@
         public string Password { get; set; }
         public string Domain { get; set; }
         public override string ToString() {
-            return $"\nUserName: {UserName}\nPassword: {Password}\nDomain: {Domain}";
+            return $"\n---> NetworkCredential \n----> UserName: {UserName}\n----> Password: {Password}\n----> Domain: {Domain}";
         }
     }
 }

@@ -5,7 +5,7 @@ using Splendor.Backup.Models;
 using Microsoft.Extensions.Configuration;
 using System.Text;
 using System.Collections.Generic;
-using Splendor.Costants;
+using Splendor.Utility.Utils;
 namespace Splendor.Backup.Helpers {
     public sealed class Config {
         public string Path { get; set; }
@@ -16,12 +16,21 @@ namespace Splendor.Backup.Helpers {
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
             sb.Append("\n").Append(Costants.Backup.LOG_BAR);
-            sb.Append("\n").Append(Costants.Backup.SINGLE_SHARP).Append(CenterString(Costants.Backup.CONFIG_LOADED,Costants.Backup.LOG_BAR.Length -2)).Append(Costants.Backup.SINGLE_SHARP);
+            sb.Append("\n").Append(Costants.Backup.SINGLE_SHARP).Append(Strings.CenterString(Costants.Backup.CONFIG_LOADED,Costants.Backup.LOG_BAR.Length -2)).Append(Costants.Backup.SINGLE_SHARP);
             sb.Append("\n").Append(Costants.Backup.LOG_BAR);
             sb.Append($"\nCurrent date: {Config.Instance.CurrentDate}");
             sb.Append($"\nCurrent work path: {Config.Instance.Path}");
             sb.Append($"\nCurrent Os: {Config.Instance.CurrentOs}");
-            sb.Append($"OutputFolder: {OutFolder.ToString()}" );
+            sb.Append($"\nOutputFolder: {OutFolder.ToString()}" );
+            sb.Append($"\nList of Apps count {Apps.Count}");
+            int i = 1;
+            foreach(var app in Apps) {
+                sb.Append (app.ToString ());
+                i++;
+            }
+            sb.Append ("\n").Append (Costants.Backup.LOG_BAR);
+            sb.Append ("\n").Append (Costants.Backup.SINGLE_SHARP).Append (Strings.CenterString (Costants.Backup.CONFIG_LOADED, Costants.Backup.LOG_BAR.Length - 2)).Append (Costants.Backup.SINGLE_SHARP);
+            sb.Append ("\n").Append (Costants.Backup.LOG_BAR);
             return sb.ToString();
         }
         private Config() {
@@ -83,8 +92,6 @@ namespace Splendor.Backup.Helpers {
             }
             return RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? OS.OSX : OS.Linux;
         }
-        private string CenterString(string stringToCenter, int totalLength) {
-            return stringToCenter.PadLeft(((totalLength - stringToCenter.Length) / 2)+ stringToCenter.Length).PadRight(totalLength);
-        }
+
     }
 }
