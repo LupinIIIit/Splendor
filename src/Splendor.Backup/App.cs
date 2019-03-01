@@ -10,9 +10,8 @@ using Splendor.Backup.Helpers;
 namespace Splendor.Backup {
     public class App {
         public void Run() {
-            Log.Information($"Current date: {Config.Instance.CurrentDate}");
-            Log.Information($"Current work path: {Config.Instance.Path}");
-            Log.Information($"Current Os: {Config.Instance.CurrentOs}");
+            Log.Information(Config.Instance.ToString());
+            
             var check = new CheckFoldersBackup();
             if (check.Run()) {
 

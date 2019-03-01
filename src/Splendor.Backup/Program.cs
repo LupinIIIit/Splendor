@@ -6,7 +6,7 @@ namespace Splendor.Backup {
     class Program {
         static void Main(string[] args) {
             string path = CheckOrCreateAppFolder.HomeFolder();
-            var logFileName = $"log-{DateTime.Now.ToString("MMddyyyy")}";
+            var logFileName = $"backup-{DateTime.Now.ToString("MMddyyyy")}.log";
             if (!CheckOrCreateAppFolder.CheckFolder()){
                 if (!CheckOrCreateAppFolder.CreateHomeFolder()) {
                     throw new Exception("Impossibile creare la home directory.");
