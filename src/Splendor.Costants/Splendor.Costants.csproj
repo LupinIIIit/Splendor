@@ -3,6 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Backup\" />
+    <Compile Remove="Backup\Backup.cs" />
+    <Compile Remove="Backup\Costant.cs" />
   </ItemGroup>
 </Project>
