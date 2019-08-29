@@ -1,36 +1,41 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using Splendor.Utility.IO;
+﻿using Microsoft.Extensions.Configuration;
 using Splendor.Backup.Models;
-using Microsoft.Extensions.Configuration;
-using System.Text;
-using System.Collections.Generic;
+using Splendor.Utility.IO;
 using Splendor.Utility.Utils;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Text;
 namespace Splendor.Backup.Helpers {
     public sealed class Config {
         public string Path { get; set; }
         public string CurrentDate { get; set; }
         public OS CurrentOs { get; set; }
+        public List<string> ActiveBackupFolders { get; set; }
         public FolderModel OutFolder { get; set; }
         public List<ApplicationModel> Apps { get; set; }
+        public bool IsDebug { get; set; }
         public override string ToString() {
             StringBuilder sb = new StringBuilder();
             sb.Append("\n").Append(Costants.Backup.LOG_BAR);
-            sb.Append("\n").Append(Costants.Backup.SINGLE_SHARP).Append(Strings.CenterString(Costants.Backup.CONFIG_LOADED,Costants.Backup.LOG_BAR.Length -2)).Append(Costants.Backup.SINGLE_SHARP);
+            sb.Append("\n").Append(Costants.Backup.SINGLE_SHARP).Append(Strings.CenterString(Costants.Backup.CONFIG_LOADED, Costants.Backup.LOG_BAR.Length - 2)).Append(Costants.Backup.SINGLE_SHARP);
             sb.Append("\n").Append(Costants.Backup.LOG_BAR);
             sb.Append($"\nCurrent date: {Config.Instance.CurrentDate}");
             sb.Append($"\nCurrent work path: {Config.Instance.Path}");
             sb.Append($"\nCurrent Os: {Config.Instance.CurrentOs}");
-            sb.Append($"\nOutputFolder: {OutFolder.ToString()}" );
+            sb.Append($"\nOutputFolder: {OutFolder.ToString()}");
             sb.Append($"\nList of Apps count {Apps.Count}");
-            int i = 1;
-            foreach(var app in Apps) {
-                sb.Append (app.ToString ());
-                i++;
+            foreach (var app in Apps) {
+                sb.Append(app.ToString());
             }
-            sb.Append ("\n").Append (Costants.Backup.LOG_BAR);
-            sb.Append ("\n").Append (Costants.Backup.SINGLE_SHARP).Append (Strings.CenterString (Costants.Backup.CONFIG_LOADED, Costants.Backup.LOG_BAR.Length - 2)).Append (Costants.Backup.SINGLE_SHARP);
-            sb.Append ("\n").Append (Costants.Backup.LOG_BAR);
+            sb.Append($"\nList current Acvite backup folder {ActiveBackupFolders.Count}");
+            foreach (var app in ActiveBackupFolders) {
+                sb.Append($"\nFolder {app}");
+            }
+            sb.Append($"\nIs in Debug Mode: {IsDebug}");
+            sb.Append("\n").Append(Costants.Backup.LOG_BAR);
+            sb.Append("\n").Append(Costants.Backup.SINGLE_SHARP).Append(Strings.CenterString(Costants.Backup.CONFIG_LOADED, Costants.Backup.LOG_BAR.Length - 2)).Append(Costants.Backup.SINGLE_SHARP);
+            sb.Append("\n").Append(Costants.Backup.LOG_BAR);
             return sb.ToString();
         }
         private Config() {
@@ -40,7 +45,8 @@ namespace Splendor.Backup.Helpers {
         public static Config Instance => lazy.Value;
         private void LoadConfig() {
             Path = CheckOrCreateAppFolder.HomeFolder();
-            CurrentDate = DateTime.Now.ToString("MMddyyyy");
+            CurrentDate = DateTime.Now.ToString("ddMMyyyy");
+            LoadActiveFolders();
             CurrentOs = GetOS();
             IConfiguration config = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
             // Read configuration
@@ -49,8 +55,21 @@ namespace Splendor.Backup.Helpers {
             var appSect = config.GetSection(Costants.Backup.LIST_APPS);
             Apps = new List<ApplicationModel>();
             var appList = appSect.GetChildren();
-            foreach(var app in appList) {
+            foreach (var app in appList) {
                 Apps.Add(PopulateAppModel(app));
+            }
+            #if DEBUG
+                IsDebug = true;
+            #else
+                IsDebug = false;
+            #endif
+        }
+        private void LoadActiveFolders() {
+            ActiveBackupFolders = new List<string>();
+            ActiveBackupFolders.Add(CurrentDate);
+            for (var i = 1; i < 5; i++) {
+                DateTime dt = DateTime.Now.AddDays(-i);
+                ActiveBackupFolders.Add(dt.ToString("ddMMyyyy"));
             }
         }
         private FolderModel PopulateFolderModel(IConfigurationSection FolderSect) {
